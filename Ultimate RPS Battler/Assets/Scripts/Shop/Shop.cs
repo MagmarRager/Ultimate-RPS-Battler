@@ -9,29 +9,24 @@ public class Shop : MonoBehaviour
 
     public bool selected = false;
 
-    public TextMeshProUGUI price;
+    public TextMeshProUGUI priceText;
+    public int unitPrice;
 
     private void Awake()
     {
-        price = GetComponentInChildren<TextMeshProUGUI>();
+        priceText = GetComponentInChildren<TextMeshProUGUI>();
     }
 
     private void Update()
     {
         if (holdingUnit != null && !selected)
         {
-            holdingUnit.transform.position = transform.position;
-            price.text = "" + holdingUnit.GetComponent<UnitScript>().unitSO.cost;
+            if (holdingUnit.transform.position != transform.position)
+            {
+                holdingUnit.transform.position = transform.position;
+                unitPrice = holdingUnit.GetComponent<UnitScript>().unitSO.cost;
+                priceText.text = "" + unitPrice;
+            }
         }
-    }
-
-    public void Selected()
-    {
-
-    }
-
-    public void Deselected()
-    {
-
     }
 }

@@ -1,12 +1,16 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
-using static UnityEngine.GraphicsBuffer;
-
 
 public class InputHandler : MonoBehaviour, IPointerClickHandler, IDragHandler, IPointerEnterHandler, IPointerExitHandler
 {
+    public TextMeshProUGUI playerMoneyText;
+    [SerializeField]
+    private int playerCoins = 10;
+    [SerializeField]
+    private int selectedUnitCost;
 
     private ShopController shopCtrl;
     public Shop selectedShop;
@@ -20,13 +24,13 @@ public class InputHandler : MonoBehaviour, IPointerClickHandler, IDragHandler, I
 
     void Start()
     {
+        playerCoins = 10;
         arrowEmitter.ArrowVisability(false);
         shopCtrl = GetComponentInChildren<ShopController>();
     }
 
     public void OnPointerClick(PointerEventData eventData)
     {
-        Debug.Log(eventData.pointerEnter.gameObject.name);
 
         if (eventData.pointerEnter.gameObject.tag == "Shop")
         {
@@ -47,6 +51,7 @@ public class InputHandler : MonoBehaviour, IPointerClickHandler, IDragHandler, I
         if (selectedShop != null && selectedBoard1 != null)
         {
             ShopTransition();
+            playerMoneyText.text = "Coins : " + playerCoins;
         }
 
         UpdateArrow();
@@ -60,12 +65,13 @@ public class InputHandler : MonoBehaviour, IPointerClickHandler, IDragHandler, I
             selectedShop = shopObj.GetComponent<Shop>();
 
             //If not holding anything and is the first selected, then clear
-            if (selectedShop.holdingUnit == null && arrowPositions.Count == 0)
+            if (arrowPositions.Count == 0 && (selectedShop.holdingUnit == null || selectedShop.unitPrice > playerCoins))
             {
                 selectedShop = null;
             }
             else
             {
+                selectedUnitCost = selectedShop.unitPrice;
                 selectedShop.selected = true;
                 arrowPositions.Add(selectedShop.transform);
             }
@@ -89,7 +95,7 @@ public class InputHandler : MonoBehaviour, IPointerClickHandler, IDragHandler, I
                 arrowPositions.Add(selectedBoard1.transform);
 
         }
-        else if(selectedBoard1.gameObject != boardObj) //If tile is not clicked twice 
+        else if (selectedBoard1.gameObject != boardObj) //If tile is not clicked twice 
         {
             //Switching places with board 1 and 2
             selectedBoard2 = boardObj.GetComponent<Board>();
@@ -105,11 +111,13 @@ public class InputHandler : MonoBehaviour, IPointerClickHandler, IDragHandler, I
         if (selectedBoard1.holdingUnit == null && selectedShop.holdingUnit != null) //Trying to Buy from shop
         {
             //Unit switch place from shop to board
+            playerCoins -= selectedUnitCost;
             selectedBoard1.holdingUnit = selectedShop.holdingUnit;
             selectedShop.holdingUnit = null;
         }
         else if (selectedBoard1.holdingUnit != null && selectedShop.holdingUnit == null)// trying to sell
         {
+            playerCoins += selectedUnitCost;
             selectedShop.holdingUnit = selectedBoard1.holdingUnit;
             selectedBoard1.holdingUnit = null;
         }
