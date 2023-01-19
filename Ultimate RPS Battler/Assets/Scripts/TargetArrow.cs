@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class TargetArrow : MonoBehaviour
 {
@@ -14,6 +15,7 @@ public class TargetArrow : MonoBehaviour
 
     private RectTransform origin;
 
+    [SerializeField]
     private List<RectTransform> arrowNodes = new List<RectTransform>();
 
     private List<Vector2> controlPoints = new List<Vector2>();
@@ -94,6 +96,14 @@ public class TargetArrow : MonoBehaviour
         arrowNodes[0].transform.rotation = arrowNodes[1].transform.rotation;
 
 
+    }
+
+    public void ArrowVisability(bool isVisable)
+    {
+        for (int i = 0; i < arrowNodes.Count; i++)
+        {
+            arrowNodes[i].GetComponent<Image>().enabled = isVisable;
+        }
     }
 
 

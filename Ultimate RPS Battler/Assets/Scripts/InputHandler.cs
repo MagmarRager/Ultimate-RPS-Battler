@@ -14,13 +14,13 @@ public class InputHandler : MonoBehaviour, IPointerClickHandler, IDragHandler, I
     public Board selectedBoard1;
     public Board selectedBoard2;
 
-    public GameObject arrowEmitter;
+    public TargetArrow arrowEmitter;
     [SerializeField]
     private List<Transform> arrowPositions = new List<Transform>();
 
     void Start()
     {
-        arrowEmitter.SetActive(false);
+        arrowEmitter.ArrowVisability(false);
         shopCtrl = GetComponentInChildren<ShopController>();
     }
 
@@ -30,51 +30,11 @@ public class InputHandler : MonoBehaviour, IPointerClickHandler, IDragHandler, I
 
         if (eventData.pointerEnter.gameObject.tag == "Shop")
         {
-            if (selectedShop == null)
-            {
-                selectedShop = eventData.pointerEnter.gameObject.GetComponent<Shop>();
-
-                //If not holding anything and is the first selected, then clear
-                if (selectedShop.holdingUnit == null && arrowPositions.Count == 0)
-                {
-                    selectedShop = null;
-                }
-                else
-                {
-                    selectedShop.selected = true;
-                    arrowPositions.Add(selectedShop.transform);
-                }
-            }
-            else
-                DeselectAll();
-
+            DetectShopTile(eventData.pointerEnter.gameObject);
         }
         else if (eventData.pointerEnter.gameObject.tag == "Board")
         {
-            //If Board1 is occupied and then player selects another board they swap
-            if (selectedBoard1 == null)
-            {
-                selectedBoard1 = eventData.pointerEnter.gameObject.GetComponent<Board>();
-
-                //If not holding anything and is the first selected, then clear
-                if (selectedBoard1.holdingUnit == null && arrowPositions.Count == 0)
-                {
-                    selectedBoard1 = null;
-                }
-                else
-                    arrowPositions.Add(selectedBoard1.transform);
-
-            }
-            else
-            {
-                //Switching places with board 1 and 2
-                selectedBoard2 = eventData.pointerEnter.gameObject.GetComponent<Board>();
-                GameObject tempUnitHold = selectedBoard1.holdingUnit;
-                selectedBoard1.holdingUnit = selectedBoard2.holdingUnit;
-                selectedBoard2.holdingUnit = tempUnitHold;
-                DeselectAll();
-            }
-
+            DetectBoardTile(eventData.pointerEnter.gameObject);
         }
         else
         {
@@ -86,35 +46,77 @@ public class InputHandler : MonoBehaviour, IPointerClickHandler, IDragHandler, I
         //Transitions between shop and board
         if (selectedShop != null && selectedBoard1 != null)
         {
-            if (selectedBoard1.holdingUnit == null && selectedShop.holdingUnit != null) //Trying to Buy from shop
-            {
-                //Unit switch place from shop to board
-                selectedBoard1.holdingUnit = selectedShop.holdingUnit;
-                selectedShop.holdingUnit = null;
-            }
-            else if (selectedBoard1.holdingUnit != null && selectedShop.holdingUnit == null)// trying to sell
-            {
-                selectedShop.holdingUnit = selectedBoard1.holdingUnit;
-                selectedBoard1.holdingUnit = null;
-            }
-
-            DeselectAll();
+            ShopTransition();
         }
 
         UpdateArrow();
 
     }
 
-    void UpdateArrow()
+    void DetectShopTile(GameObject shopObj)
     {
-        if (arrowPositions.Count == 0)
-            arrowEmitter.SetActive(false);
-        else
+        if (selectedShop == null)
         {
-            arrowEmitter.transform.position = arrowPositions[0].position;
-            arrowEmitter.SetActive(true);
+            selectedShop = shopObj.GetComponent<Shop>();
+
+            //If not holding anything and is the first selected, then clear
+            if (selectedShop.holdingUnit == null && arrowPositions.Count == 0)
+            {
+                selectedShop = null;
+            }
+            else
+            {
+                selectedShop.selected = true;
+                arrowPositions.Add(selectedShop.transform);
+            }
+        }
+        else
+            DeselectAll();
+    }
+
+    void DetectBoardTile(GameObject boardObj)
+    {
+        //If Board1 is occupied and then player selects another board they swap
+        if (selectedBoard1 == null)
+        {
+            selectedBoard1 = boardObj.GetComponent<Board>();
+            //If not holding anything and is the first selected, then clear
+            if (selectedBoard1.holdingUnit == null && arrowPositions.Count == 0)
+            {
+                selectedBoard1 = null;
+            }
+            else
+                arrowPositions.Add(selectedBoard1.transform);
+
+        }
+        else if(selectedBoard1.gameObject != boardObj) //If tile is not clicked twice 
+        {
+            //Switching places with board 1 and 2
+            selectedBoard2 = boardObj.GetComponent<Board>();
+            GameObject tempUnitHold = selectedBoard1.holdingUnit;
+            selectedBoard1.holdingUnit = selectedBoard2.holdingUnit;
+            selectedBoard2.holdingUnit = tempUnitHold;
+            DeselectAll();
         }
     }
+
+    void ShopTransition()
+    {
+        if (selectedBoard1.holdingUnit == null && selectedShop.holdingUnit != null) //Trying to Buy from shop
+        {
+            //Unit switch place from shop to board
+            selectedBoard1.holdingUnit = selectedShop.holdingUnit;
+            selectedShop.holdingUnit = null;
+        }
+        else if (selectedBoard1.holdingUnit != null && selectedShop.holdingUnit == null)// trying to sell
+        {
+            selectedShop.holdingUnit = selectedBoard1.holdingUnit;
+            selectedBoard1.holdingUnit = null;
+        }
+
+        DeselectAll();
+    }
+
 
     void DeselectAll()
     {
@@ -126,6 +128,20 @@ public class InputHandler : MonoBehaviour, IPointerClickHandler, IDragHandler, I
         selectedBoard1 = null;
         selectedBoard2 = null;
     }
+
+
+    void UpdateArrow()
+    {
+        if (arrowPositions.Count == 0)
+            arrowEmitter.ArrowVisability(false);
+        else
+        {
+            arrowEmitter.transform.position = arrowPositions[0].position;
+            arrowEmitter.ArrowVisability(true);
+        }
+    }
+
+
 
     public void OnDrag(PointerEventData eventData)
     {
