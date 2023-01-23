@@ -6,13 +6,9 @@ using UnityEngine.EventSystems;
 
 public class InputHandler : MonoBehaviour, IPointerClickHandler, IDragHandler, IPointerEnterHandler, IPointerExitHandler
 {
-    public TextMeshProUGUI playerMoneyText;
-    [SerializeField]
-    private int playerCoins = 10;
     [SerializeField]
     private int selectedUnitCost;
 
-    private ShopController shopCtrl;
     public Shop selectedShop;
 
     public Board selectedBoard1;
@@ -24,14 +20,11 @@ public class InputHandler : MonoBehaviour, IPointerClickHandler, IDragHandler, I
 
     void Start()
     {
-        playerCoins = 10;
         arrowEmitter.ArrowVisability(false);
-        shopCtrl = GetComponentInChildren<ShopController>();
     }
 
     public void OnPointerClick(PointerEventData eventData)
     {
-
         if (eventData.pointerEnter.gameObject.tag == "Shop")
         {
             DetectShopTile(eventData.pointerEnter.gameObject);
@@ -51,7 +44,7 @@ public class InputHandler : MonoBehaviour, IPointerClickHandler, IDragHandler, I
         if (selectedShop != null && selectedBoard1 != null)
         {
             ShopTransition();
-            playerMoneyText.text = "Coins : " + playerCoins;
+            PlayerStatsHandler.Instance.UpdateUI();
         }
 
         UpdateArrow();
@@ -64,8 +57,8 @@ public class InputHandler : MonoBehaviour, IPointerClickHandler, IDragHandler, I
         {
             selectedShop = shopObj.GetComponent<Shop>();
 
-            //If not holding anything and is the first selected, then clear
-            if (arrowPositions.Count == 0 && (selectedShop.holdingUnit == null || selectedShop.unitPrice > playerCoins))
+            //If not holding anything and is the first selected or not enough money, then clear
+            if (arrowPositions.Count == 0 && (selectedShop.holdingUnit == null || !PlayerStatsHandler.Instance.EnoughCoins(selectedShop.unitPrice)))
             {
                 selectedShop = null;
             }
@@ -111,13 +104,15 @@ public class InputHandler : MonoBehaviour, IPointerClickHandler, IDragHandler, I
         if (selectedBoard1.holdingUnit == null && selectedShop.holdingUnit != null) //Trying to Buy from shop
         {
             //Unit switch place from shop to board
-            playerCoins -= selectedUnitCost;
+            PlayerStatsHandler.Instance.coins -= selectedUnitCost;
+
             selectedBoard1.holdingUnit = selectedShop.holdingUnit;
             selectedShop.holdingUnit = null;
         }
         else if (selectedBoard1.holdingUnit != null && selectedShop.holdingUnit == null)// trying to sell
         {
-            playerCoins += selectedUnitCost;
+            PlayerStatsHandler.Instance.coins += selectedUnitCost;
+
             selectedShop.holdingUnit = selectedBoard1.holdingUnit;
             selectedBoard1.holdingUnit = null;
         }

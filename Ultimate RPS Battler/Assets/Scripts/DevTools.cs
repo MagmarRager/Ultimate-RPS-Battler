@@ -11,5 +11,11 @@ public class DevTools : MonoBehaviour
         {
             SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         }
+
+        if (Input.GetKey(KeyCode.D) && Input.GetKey(KeyCode.E) && Input.GetKeyDown(KeyCode.L))
+        {
+            Debug.LogWarning("Player prefs Cleared!");
+            PlayerPrefs.DeleteAll();
+        }
     }
 }

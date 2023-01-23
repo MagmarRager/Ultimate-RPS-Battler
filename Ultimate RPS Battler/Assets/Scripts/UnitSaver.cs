@@ -13,6 +13,8 @@ public class UnitSaver : MonoBehaviour
     private const string UNITS_LENGTH = "UNITS_LENGTH";
     private const string UNITS = "UNITS";
 
+    //NOTE: player index 0 is the Player currently playing!
+
     private void Awake()
     {
         if (Instance != null && Instance != this)
@@ -23,13 +25,18 @@ public class UnitSaver : MonoBehaviour
         {
             Instance = this;
         }
+
+        for (int i = 0; i < baseUnits.Count; i++)
+        {
+            baseUnits[i].ID = i;
+        }
     }
 
-    public void SaveUnits(int[] units, int pIndex)
+    public void SaveUnits(List<int> units, int pIndex)
     {
-        PlayerPrefs.SetInt(pIndex + UNITS_LENGTH, units.Length);
+        PlayerPrefs.SetInt(pIndex + UNITS_LENGTH, units.Count);
 
-        for (int i = 0; i < units.Length; i++)
+        for (int i = 0; i < units.Count; i++)
         {
             PlayerPrefs.SetInt(pIndex + UNITS + i, units[i]);
         }

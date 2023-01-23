@@ -1,0 +1,11 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources xmlns:tools="http://schemas.android.com/tools" tools:keep="@string/firebase_database_url,@string/gcm_defaultSenderId,@string/google_storage_bucket,@string/project_id,@string/google_api_key,@string/google_crash_reporting_api_key,@string/google_app_id,@string/default_web_client_id">
+  <string name="firebase_database_url" translatable="false">https://ultimate-rps-battler-default-rtdb.europe-west1.firebasedatabase.app</string>
+  <string name="gcm_defaultSenderId" translatable="false">21837005105</string>
+  <string name="google_storage_bucket" translatable="false">ultimate-rps-battler.appspot.com</string>
+  <string name="project_id" translatable="false">ultimate-rps-battler</string>
+  <string name="google_api_key" translatable="false">AIzaSyBwZYr6_tKZg5-2uVsJniQyyAd9URRCMSo</string>
+  <string name="google_crash_reporting_api_key" translatable="false">AIzaSyBwZYr6_tKZg5-2uVsJniQyyAd9URRCMSo</string>
+  <string name="google_app_id" translatable="false">1:21837005105:android:c78deb47ba7f09ae1f3010</string>
+  <string name="default_web_client_id" translatable="false">21837005105-gqp1i3ibaepo7hcniqd2gt6b3amcd81t.apps.googleusercontent.com</string>
+</resources>

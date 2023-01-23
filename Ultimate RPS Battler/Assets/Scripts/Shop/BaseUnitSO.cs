@@ -8,6 +8,7 @@ public enum UnitTypes { Rock = 1, Paper = 2, Scissors = 3};
 public class BaseUnitSO : ScriptableObject
 {
     public string unitName;
+    public int ID;
 
     public int health;
     public int damage;

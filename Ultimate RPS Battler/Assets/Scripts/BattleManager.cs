@@ -22,9 +22,9 @@ public class BattleManager : MonoBehaviour
     public List<GameObject> RightBoardUnits = new List<GameObject>();
 
     [Header("TEST")]
-    public int[] unitIDTestL;
-
-    public int[] unitIDTestR;
+    [SerializeField] private List<int> unitIDTest1;
+    [SerializeField] private List<int> unitIDTest2;
+    [SerializeField] private List<int> unitIDTest3;
 
 
     [SerializeField] private List<int> unitIDLoadL;
@@ -39,11 +39,12 @@ public class BattleManager : MonoBehaviour
         posHandler = GetComponentInChildren<PointHandler>();
         gameStarted = false;
 
-        UnitSaver.Instance.SaveUnits(unitIDTestL, 1);
-        UnitSaver.Instance.SaveUnits(unitIDTestR, 2);
+        UnitSaver.Instance.SaveUnits(unitIDTest1, 1);
+        UnitSaver.Instance.SaveUnits(unitIDTest2, 2);
+        UnitSaver.Instance.SaveUnits(unitIDTest3, 3);
 
-        UnitSaver.Instance.LoadUnits(unitIDLoadL, 1);
-        UnitSaver.Instance.LoadUnits(unitIDLoadR, 2);
+        UnitSaver.Instance.LoadUnits(unitIDLoadL, 0);
+        UnitSaver.Instance.LoadUnits(unitIDLoadR, Random.Range(1,4));
 
 
         if (startGame)
@@ -126,16 +127,28 @@ public class BattleManager : MonoBehaviour
             if (LeftBoardUnits.Count <= 0 && RightBoardUnits.Count <= 0)
             {
                 Debug.Log("DRAW!");
+                Invoke(nameof(BattleFinished), 2);
             }
             else if (RightBoardUnits.Count <= 0)
             {
                 Debug.Log("LEFT WINS!!");
+                PlayerStatsHandler.Instance.fightTier++;
+
+                Invoke(nameof(BattleFinished), 2);
             }
             else if (LeftBoardUnits.Count <= 0)
             {
                 Debug.Log("RIGHT WINS!?");
+                PlayerStatsHandler.Instance.TakeDamage(-1);
+                Invoke(nameof(BattleFinished), 2);
             }
+
         }
+    }
+
+    void BattleFinished()
+    {
+        PlayerStatsHandler.Instance.LoadAnotherScene(0);
     }
 
     public void MoveUnitsToPoints(float moveTime)

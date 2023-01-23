@@ -28,5 +28,9 @@ public class Shop : MonoBehaviour
                 priceText.text = "" + unitPrice;
             }
         }
+        else if(holdingUnit == null && priceText.text != "")
+        {
+            priceText.text = "";
+        }
     }
 }
