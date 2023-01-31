@@ -18,9 +18,15 @@ public class InputHandler : MonoBehaviour, IPointerClickHandler, IDragHandler, I
     [SerializeField]
     private List<Transform> arrowPositions = new List<Transform>();
 
+    [Header("Text Components")]
+    public TextMeshProUGUI coinsText;
+    public TextMeshProUGUI healthText;
+
+
     void Start()
     {
         arrowEmitter.ArrowVisability(false);
+        UpdateUI();
     }
 
     public void OnPointerClick(PointerEventData eventData)
@@ -37,6 +43,7 @@ public class InputHandler : MonoBehaviour, IPointerClickHandler, IDragHandler, I
         {
             //Clicked on nothing cleares all
             DeselectAll();
+            UpdateUI();
         }
 
 
@@ -44,7 +51,7 @@ public class InputHandler : MonoBehaviour, IPointerClickHandler, IDragHandler, I
         if (selectedShop != null && selectedBoard1 != null)
         {
             ShopTransition();
-            PlayerStatsHandler.Instance.UpdateUI();
+            UpdateUI();
         }
 
         UpdateArrow();
@@ -132,6 +139,18 @@ public class InputHandler : MonoBehaviour, IPointerClickHandler, IDragHandler, I
         selectedBoard2 = null;
     }
 
+
+    public void UpdateUI()
+    {
+        if (coinsText != null)
+        {
+            coinsText.text = "" + PlayerStatsHandler.Instance.coins;
+        }
+        if (healthText != null)
+        {
+            healthText.text = "" + PlayerStatsHandler.Instance.lives;
+        }
+    }
 
     void UpdateArrow()
     {

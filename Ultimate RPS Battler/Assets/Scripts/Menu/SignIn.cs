@@ -62,8 +62,7 @@ public class SignIn : MonoBehaviour
                 Debug.LogFormat("User signed in Successfully: {0} ({1})", newUser.DisplayName, newUser.UserId);
                 status.text = newUser.Email + " is Signed In";
                 FirebaseManager.Instance.userId = FirebaseAuth.DefaultInstance.CurrentUser.UserId;
-                //LoadMenuScene();
-                CreateNewStats();
+                LoadMenuScene();
             }
         });
     }
@@ -74,34 +73,7 @@ public class SignIn : MonoBehaviour
     }
 
 
-    void CreateNewStats()
-    {
-        //the database
-        var db = FirebaseDatabase.DefaultInstance;
-        var userId = FirebaseAuth.DefaultInstance.CurrentUser.UserId;
 
-        UserInfo userInfo = new UserInfo();
-
-        userInfo.Winns = 0;
-        //userInfo.Losses = 0;
-
-        string jsonString = JsonUtility.ToJson(userInfo);
-
-        //Set the value World to the key Hello in the database
-        db.RootReference.Child("users").Child(userId).SetRawJsonValueAsync("Hello World");
-        //Debug.Log("THIS SHOULD WORK");
-
-
-        db.RootReference.Child("users").Child(userId).SetRawJsonValueAsync(jsonString).ContinueWithOnMainThread(task =>
-        {
-            if (task.Exception != null)
-                Debug.LogWarning(task.Exception);
-            else
-            {
-                Debug.Log("DataTestWrite: Complete");
-            }
-        });
-    }
 
     public void RegisterButton()
     {
@@ -136,6 +108,31 @@ public class SignIn : MonoBehaviour
                 FirebaseUser newUser = task.Result;
                 Debug.LogFormat("User Registerd: {0} ({1})", newUser.DisplayName, newUser.UserId);
                 status.text = newUser.Email + " Registerd and Signed In";
+                CreateNewStats();
+            }
+        });
+    }
+
+    void CreateNewStats()
+    {
+        //the database
+        var db = FirebaseDatabase.DefaultInstance;
+        var userId = FirebaseAuth.DefaultInstance.CurrentUser.UserId;
+
+        UserInfo userInfo = new UserInfo();
+
+        userInfo.Winns = 0;
+        userInfo.Losses = 0;
+
+        string jsonString = JsonUtility.ToJson(userInfo);
+
+        db.RootReference.Child("users").Child(userId).SetRawJsonValueAsync(jsonString).ContinueWithOnMainThread(task =>
+        {
+            if (task.Exception != null)
+                Debug.LogWarning(task.Exception);
+            else
+            {
+                Debug.Log("DataTestWrite: Complete");
             }
         });
     }
@@ -143,7 +140,7 @@ public class SignIn : MonoBehaviour
     public void SendNewPasswordMail()
     {
         auth.SendPasswordResetEmailAsync(email.text);
-        status.text = "A mail has been sent to " + email.text + " with instructions to reset password";
+        status.text = "A mail has been sent to " + email.text + " with instructions";
     }
 
 

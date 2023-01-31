@@ -1,6 +1,7 @@
 using DG.Tweening;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -22,14 +23,11 @@ public class BattleManager : MonoBehaviour
     public List<GameObject> LeftBoardUnits = new List<GameObject>();
     public List<GameObject> RightBoardUnits = new List<GameObject>();
 
-    [Header("TEST")]
-    [SerializeField] private List<int> unitIDTest1;
-    [SerializeField] private List<int> unitIDTest2;
-    [SerializeField] private List<int> unitIDTest3;
-
 
     [SerializeField] private List<int> unitIDLoadL;
     [SerializeField] private List<int> unitIDLoadR;
+
+    public TextMeshProUGUI healthText;
 
 
     // Start is called before the first frame update
@@ -40,12 +38,14 @@ public class BattleManager : MonoBehaviour
         posHandler = GetComponentInChildren<PointHandler>();
         gameStarted = false;
 
-        UnitSaver.Instance.SaveUnits(unitIDTest1, 1);
-        UnitSaver.Instance.SaveUnits(unitIDTest2, 2);
-        UnitSaver.Instance.SaveUnits(unitIDTest3, 3);
-
+        UnitSaver.Instance.LoadTier(0);
         UnitSaver.Instance.LoadUnits(unitIDLoadL, 0);
-        UnitSaver.Instance.LoadUnits(unitIDLoadR, Random.Range(1,4));
+        //UnitSaver.Instance.LoadUnits(unitIDLoadR, Random.Range(1,4));
+
+        CheckIfLoading();
+
+        if (healthText != null)
+            healthText.text = "" + PlayerStatsHandler.Instance.lives;
 
 
         if (startGame)
@@ -55,6 +55,25 @@ public class BattleManager : MonoBehaviour
             Invoke(nameof(SpawnUnits), 1);
         }
 
+
+
+    }
+
+    void CheckIfLoading()
+    {
+        if (!UnitSaver.Instance.LoadingList)
+        {
+            Debug.Log("READY!!!");
+            unitIDLoadR = UnitSaver.Instance.LoadUnitsFromDatabase(0);
+
+            startGame = true;
+        }
+        else
+        {
+            Debug.Log("Loading...");
+            startGame = false;
+            Invoke(nameof(CheckIfLoading), 1);
+        }
     }
 
     void SpawnUnits()
@@ -65,13 +84,14 @@ public class BattleManager : MonoBehaviour
         MoveUnitsToPoints(1);
     }
 
+
+
     // Update is called once per frame
     void Update()
     {
         if (startGame && !gameStarted)
         {
             gameStarted = true;
-
             SpawnUnits();
         }
 
@@ -133,14 +153,17 @@ public class BattleManager : MonoBehaviour
             else if (RightBoardUnits.Count <= 0)
             {
                 Debug.Log("LEFT WINS!!");
-                PlayerStatsHandler.Instance.round++;
+                UnitSaver.Instance.SaveUnitsToDatabase(unitIDLoadL, PlayerStatsHandler.Instance.tier);
+
+
+                PlayerStatsHandler.Instance.tier++;
 
                 Invoke(nameof(BattleFinished), 2);
             }
             else if (LeftBoardUnits.Count <= 0)
             {
                 Debug.Log("RIGHT WINS!?");
-                PlayerStatsHandler.Instance.AddHealth(-1);
+                PlayerStatsHandler.Instance.lives -= 1;
                 Invoke(nameof(BattleFinished), 2);
             }
 
@@ -149,6 +172,7 @@ public class BattleManager : MonoBehaviour
 
     void BattleFinished()
     {
+        PlayerStatsHandler.Instance.coins = 10;
         PlayerStatsHandler.Instance.LoadAnotherScene("ShopScene");
     }
 

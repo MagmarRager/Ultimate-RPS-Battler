@@ -26,6 +26,9 @@ public class UnitSaver : MonoBehaviour
 
     //NOTE: player index 0 is the Player currently playing!
 
+    public List<List<UnitInfo>> LoadedTier = new List<List<UnitInfo>>();
+
+
     private void Awake()
     {
         if (Instance != null && Instance != this)
@@ -41,6 +44,7 @@ public class UnitSaver : MonoBehaviour
         {
             baseUnits[i].ID = i;
         }
+
     }
 
     public void SaveUnits(List<int> units, int pIndex)
@@ -53,8 +57,16 @@ public class UnitSaver : MonoBehaviour
 
         }
     }
+    public void LoadUnits(List<int> unitList, int pIndex)
+    {
 
-    public void SaveUnitsToDatabase(List<int> units, int pIndex, int tier)
+        for (int i = 0; i < PlayerPrefs.GetInt(pIndex + UNITS_LENGTH); i++)
+        {
+            unitList.Add(PlayerPrefs.GetInt(pIndex + UNITS + i));
+        }
+    }
+
+    public void SaveUnitsToDatabase(List<int> units, int tier)
     {
         UnitInfo unitInfo = new UnitInfo();
 
@@ -63,19 +75,33 @@ public class UnitSaver : MonoBehaviour
 
         string jsonString = JsonUtility.ToJson(unitInfo);
 
-
-        PlayerPrefs.SetInt(pIndex + UNITS_LENGTH, units.Count);
-
         FirebaseManager.Instance.SaveUnitData(tier, jsonString);
     }
 
-    public void LoadUnits(List<int> unitList, int pIndex)
-    {
+    //Replace current tier to PlayerStatsCount
 
-        for (int i = 0; i < PlayerPrefs.GetInt(pIndex + UNITS_LENGTH); i++)
-        {
-            unitList.Add(PlayerPrefs.GetInt(pIndex + UNITS + i));
-        }
+
+    public bool LoadingList = false;
+    public void LoadTier(int tier)
+    {
+        LoadingList = true;
+        FirebaseManager.Instance.LoadUnitData<UnitInfo>(tier, ListLoaded);
+    }
+
+    private void ListLoaded(List<UnitInfo> UsersInfo)
+    {
+        LoadedTier.Add(UsersInfo);
+        LoadingList = false;
+    }
+
+    public List<int> LoadUnitsFromDatabase(int tier, int user)
+    {
+        return LoadedTier[tier][user].units;
+    }
+
+    public List<int> LoadUnitsFromDatabase(int tier) // If wanted random
+    {
+        return LoadedTier[tier][UnityEngine.Random.Range(0, LoadedTier[tier].Count)].units;
     }
 
 

@@ -33,7 +33,7 @@ public class DevTools : MonoBehaviour
 
         if(Input.GetKey(KeyCode.S) && Input.GetKey(KeyCode.A) && Input.GetKeyDown(KeyCode.V))
         {
-            UnitSaver.Instance.SaveUnitsToDatabase(savedUnits, 0, tier);
+            UnitSaver.Instance.SaveUnitsToDatabase(savedUnits, tier);
             Debug.Log("Try Save");
         }
 

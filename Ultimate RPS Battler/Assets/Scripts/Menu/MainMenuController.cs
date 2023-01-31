@@ -34,7 +34,7 @@ public class MainMenuController : MonoBehaviour
 
         PlayerPrefs.DeleteKey(0 + UNITS_LENGTH);
 
-        PlayerStatsHandler.Instance.AddHealth(5);
+        PlayerStatsHandler.Instance.lives = 5;
         SceneManager.LoadScene("ShopScene");
     }
 

@@ -1184,12 +1184,9 @@ GameObject:
   m_Component:
   - component: {fileID: 1303207056}
   - component: {fileID: 1303207057}
-  - component: {fileID: 1303207061}
-  - component: {fileID: 1303207060}
   - component: {fileID: 1303207058}
-  - component: {fileID: 1303207059}
   m_Layer: 0
-  m_Name: GameController
+  m_Name: BattleController
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1229,11 +1226,9 @@ MonoBehaviour:
   gameEnd: 0
   LeftBoardUnits: []
   RightBoardUnits: []
-  unitIDTest1: 000000000000000000000000000000000000000000000000
-  unitIDTest2: 010000000100000001000000010000000100000001000000
-  unitIDTest3: 020000000200000002000000020000000200000002000000
   unitIDLoadL: 
   unitIDLoadR: 
+  healthText: {fileID: 965452909}
 --- !u!114 &1303207058
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1247,53 +1242,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   directionText: {fileID: 1697106103}
---- !u!114 &1303207059
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1303207055}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 279e17898cb78e64fbd653d175d8c8eb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &1303207060
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1303207055}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cbac15d7cc042d645a7b9ff450915bd8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  unitPrefab: {fileID: 7875624283113892663, guid: 9254d517c12d9c34597a419cf2e0fd14, type: 3}
-  baseUnits:
-  - {fileID: 11400000, guid: f0f167bf2987e3c49a707123be86852b, type: 2}
-  - {fileID: 11400000, guid: 8c9f0dda40dff4d489ac3d4514cb5df3, type: 2}
-  - {fileID: 11400000, guid: d7b9d0969d062de46963409a59e061f0, type: 2}
---- !u!114 &1303207061
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1303207055}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cd534f5a3f63c534bb4aacef7a291ae4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  coins: 10
-  fightTier: 0
-  coinsText: {fileID: 0}
-  healthText: {fileID: 965452909}
-  totWins: 0
-  totLosses: 0
 --- !u!1 &1339664590
 GameObject:
   m_ObjectHideFlags: 0

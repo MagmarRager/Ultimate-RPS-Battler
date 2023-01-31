@@ -33,7 +33,6 @@ public class ShopController : MonoBehaviour
         {
             ReloadShop();
             PlayerStatsHandler.Instance.coins -= rerollCost;
-            PlayerStatsHandler.Instance.UpdateUI();
         }
     }
 

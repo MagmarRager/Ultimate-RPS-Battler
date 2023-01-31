@@ -93,8 +93,6 @@ public class FirebaseManager : MonoBehaviour
             if (task.Exception != null)
                 Debug.LogWarning(task.Exception);
 
-            Debug.Log(task.Result.Children);
-
             var ListOfT = new List<T>();
 
             foreach (var item in task.Result.Children)
@@ -103,8 +101,6 @@ public class FirebaseManager : MonoBehaviour
             onLoadedDelegate(ListOfT);
         });
     }
-    //public List<UnitInfo> userUnits; 
-
 
 
 

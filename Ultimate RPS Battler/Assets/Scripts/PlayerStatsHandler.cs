@@ -13,12 +13,9 @@ public class PlayerStatsHandler : MonoBehaviour
 
     [Header("In Game stats")]
     public int coins = 10;
-    public int round = 0;
+    public int tier = 0;
     public int shopTier = 0;
-    private int lives;
-
-    public TextMeshProUGUI coinsText;
-    public TextMeshProUGUI healthText;
+    public int lives;
 
     [Header("Out of Game stats")]
     public int totWins;
@@ -36,39 +33,11 @@ public class PlayerStatsHandler : MonoBehaviour
         }
     }
 
-    private void Update()
-    {
-        if(Input.GetKeyDown(KeyCode.H))
-        {
-            AddHealth(2);
-        }
-    }
-
     private void Start()
     {
-        lives = PlayerPrefs.GetInt(0 + PLAYER_LIVES);
         coins = 10;
-        UpdateUI();
     }
 
-    public void AddHealth(int ammount)
-    {
-        lives += ammount;
-        PlayerPrefs.SetInt(0 + PLAYER_LIVES, lives);
-        UpdateUI();
-    }
-
-    public void UpdateUI()
-    {
-        if (coinsText != null)
-        {
-            coinsText.text = "" + coins;
-        }
-        if(healthText != null)
-        {
-            healthText.text = "" + lives;
-        }
-    }
 
     public bool EnoughCoins(int cost)
     {
