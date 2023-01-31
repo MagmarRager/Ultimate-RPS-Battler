@@ -1,6 +1,17 @@
+using Firebase.Auth;
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 using UnityEngine;
+
+[Serializable]
+
+public class UnitInfo
+{
+    public int unit_Leangth;
+    public List<int> units;
+}
 
 public class UnitSaver : MonoBehaviour
 {
@@ -39,7 +50,23 @@ public class UnitSaver : MonoBehaviour
         for (int i = 0; i < units.Count; i++)
         {
             PlayerPrefs.SetInt(pIndex + UNITS + i, units[i]);
+
         }
+    }
+
+    public void SaveUnitsToDatabase(List<int> units, int pIndex, int tier)
+    {
+        UnitInfo unitInfo = new UnitInfo();
+
+        unitInfo.unit_Leangth = units.Count;
+        unitInfo.units = units;
+
+        string jsonString = JsonUtility.ToJson(unitInfo);
+
+
+        PlayerPrefs.SetInt(pIndex + UNITS_LENGTH, units.Count);
+
+        FirebaseManager.Instance.SaveUnitData(tier, jsonString);
     }
 
     public void LoadUnits(List<int> unitList, int pIndex)
@@ -52,7 +79,7 @@ public class UnitSaver : MonoBehaviour
     }
 
 
-
+    //Spawns multiple units
     public void SpawnUnits(List<int> unitID, List<Transform> spawnPositions, List<GameObject> unitList)
     {
         if (unitID.Count > spawnPositions.Count)
@@ -69,6 +96,7 @@ public class UnitSaver : MonoBehaviour
         }
     }
 
+    //Spawns single Unit
     public void SpawnUnit(int unitID, Vector2 spawnPosition, List<GameObject> unitList)
     {
         GameObject newUnit = Instantiate(unitPrefab, spawnPosition, transform.rotation);

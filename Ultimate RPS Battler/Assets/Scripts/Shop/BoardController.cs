@@ -30,7 +30,7 @@ public class BoardController : MonoBehaviour
     public void StartBattle()
     {
         SaveBoard();
-        PlayerStatsHandler.Instance.LoadAnotherScene(1);
+        PlayerStatsHandler.Instance.LoadAnotherScene("BattleScene");
     }
 
     void LoadBoard()

@@ -2,6 +2,7 @@ using DG.Tweening;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class BattleManager : MonoBehaviour
 {
@@ -132,14 +133,14 @@ public class BattleManager : MonoBehaviour
             else if (RightBoardUnits.Count <= 0)
             {
                 Debug.Log("LEFT WINS!!");
-                PlayerStatsHandler.Instance.fightTier++;
+                PlayerStatsHandler.Instance.round++;
 
                 Invoke(nameof(BattleFinished), 2);
             }
             else if (LeftBoardUnits.Count <= 0)
             {
                 Debug.Log("RIGHT WINS!?");
-                PlayerStatsHandler.Instance.TakeDamage(-1);
+                PlayerStatsHandler.Instance.AddHealth(-1);
                 Invoke(nameof(BattleFinished), 2);
             }
 
@@ -148,7 +149,7 @@ public class BattleManager : MonoBehaviour
 
     void BattleFinished()
     {
-        PlayerStatsHandler.Instance.LoadAnotherScene(0);
+        PlayerStatsHandler.Instance.LoadAnotherScene("ShopScene");
     }
 
     public void MoveUnitsToPoints(float moveTime)

@@ -13,7 +13,8 @@ public class PlayerStatsHandler : MonoBehaviour
 
     [Header("In Game stats")]
     public int coins = 10;
-    public int fightTier = 0;
+    public int round = 0;
+    public int shopTier = 0;
     private int lives;
 
     public TextMeshProUGUI coinsText;
@@ -39,7 +40,7 @@ public class PlayerStatsHandler : MonoBehaviour
     {
         if(Input.GetKeyDown(KeyCode.H))
         {
-            TakeDamage(2);
+            AddHealth(2);
         }
     }
 
@@ -50,7 +51,7 @@ public class PlayerStatsHandler : MonoBehaviour
         UpdateUI();
     }
 
-    public void TakeDamage(int ammount)
+    public void AddHealth(int ammount)
     {
         lives += ammount;
         PlayerPrefs.SetInt(0 + PLAYER_LIVES, lives);
@@ -74,9 +75,9 @@ public class PlayerStatsHandler : MonoBehaviour
         return (coins >= cost);
     }
 
-    public void LoadAnotherScene(int sceneNum)
+    public void LoadAnotherScene(string sceneName)
     {
-        SceneManager.LoadScene(sceneNum);
+        SceneManager.LoadScene(sceneName);
     }
 
 }
