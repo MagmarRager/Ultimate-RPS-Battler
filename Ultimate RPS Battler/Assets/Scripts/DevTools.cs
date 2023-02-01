@@ -14,13 +14,13 @@ public class DevTools : MonoBehaviour
     {
 
         //Key Compinations are:
-        // R = Restart Scene
+        // RES = Restart Scene
         // DEL = Clear PlayerPrefs
         // SAV = Save Units To firebase
         // LOD = Load Units from firebase
         //
 
-        if(Input.GetKeyDown(KeyCode.R))
+        if(Input.GetKey(KeyCode.R) && Input.GetKey(KeyCode.E) && Input.GetKeyDown(KeyCode.S))
         {
             SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         }

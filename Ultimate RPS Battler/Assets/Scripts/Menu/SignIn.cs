@@ -12,6 +12,7 @@ using System;
 [Serializable]
 public class UserInfo
 {
+    public string UserName;
     public int Winns;
     public int Losses;
 }
@@ -21,7 +22,8 @@ public class UserInfo
 public class SignIn : MonoBehaviour
 {
 
-    public TMP_InputField email, password;
+    public TMP_InputField email, password, userName;
+    public GameObject namePanel;
     public TextMeshProUGUI status;
 
     public delegate void OnLoadedDelegate(DataSnapshot snapshot);
@@ -38,7 +40,7 @@ public class SignIn : MonoBehaviour
 
             auth = FirebaseAuth.DefaultInstance;
         });
-
+        namePanel.SetActive(false);
 
     }
 
@@ -62,7 +64,7 @@ public class SignIn : MonoBehaviour
                 Debug.LogFormat("User signed in Successfully: {0} ({1})", newUser.DisplayName, newUser.UserId);
                 status.text = newUser.Email + " is Signed In";
                 FirebaseManager.Instance.userId = FirebaseAuth.DefaultInstance.CurrentUser.UserId;
-                LoadMenuScene();
+                FirebaseManager.Instance.LoadStatsData(LoadMenuScene);
             }
         });
     }
@@ -73,10 +75,15 @@ public class SignIn : MonoBehaviour
     }
 
 
-
+    public void EnterNamePanel()
+    {
+        namePanel.SetActive(true);
+    }
 
     public void RegisterButton()
     {
+        namePanel.SetActive(false);
+
         if (email.text.Length < 5)
         {
             status.text = "Real smart there ey? Registerign requiers a mail!";
@@ -84,6 +91,10 @@ public class SignIn : MonoBehaviour
         else if (password.text.Length < 6)
         {
             status.text = "Password is to short";
+        }
+        else if (userName.text.Length < 3)
+        {
+            status.text = "Name is to short!";
         }
         else
         {
@@ -107,13 +118,13 @@ public class SignIn : MonoBehaviour
             {
                 FirebaseUser newUser = task.Result;
                 Debug.LogFormat("User Registerd: {0} ({1})", newUser.DisplayName, newUser.UserId);
-                status.text = newUser.Email + " Registerd and Signed In";
-                CreateNewStats();
+                status.text = newUser.Email + " Registerd now just log in!";
+                CreateNewStats(userName.text);
             }
         });
     }
 
-    void CreateNewStats()
+    void CreateNewStats(string name)
     {
         //the database
         var db = FirebaseDatabase.DefaultInstance;
@@ -121,6 +132,7 @@ public class SignIn : MonoBehaviour
 
         UserInfo userInfo = new UserInfo();
 
+        userInfo.UserName = name;
         userInfo.Winns = 0;
         userInfo.Losses = 0;
 
@@ -146,6 +158,6 @@ public class SignIn : MonoBehaviour
 
     public void DebugLogIn(int number)
     {
-        SignInFirebase("test" + number + "@test.test", "EpicPass");
+        SignInFirebase("test" + number + "@test.test", "123456");
     }
 }

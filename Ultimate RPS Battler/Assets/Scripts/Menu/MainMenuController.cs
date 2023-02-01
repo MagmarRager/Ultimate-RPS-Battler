@@ -1,11 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class MainMenuController : MonoBehaviour
 {
     public GameObject profilePanel;
+    public TextMeshProUGUI userText;
 
     //Must find another way to do this
     private const string UNITS_LENGTH = "UNITS_LENGTH";
@@ -14,6 +16,7 @@ public class MainMenuController : MonoBehaviour
     private void Start()
     {
         profilePanel.SetActive(false);
+        userText.text = PlayerStatsHandler.Instance.userName + "!";
     }
 
     public void ToggleStats()

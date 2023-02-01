@@ -18,6 +18,7 @@ public class PlayerStatsHandler : MonoBehaviour
     public int lives;
 
     [Header("Out of Game stats")]
+    public string userName;
     public int totWins;
     public int totLosses;
 
@@ -33,11 +34,18 @@ public class PlayerStatsHandler : MonoBehaviour
         }
     }
 
+
     private void Start()
     {
         coins = 10;
     }
 
+    public void RefreshStats(UserInfo currentUser)
+    {
+        userName = currentUser.UserName;
+        totWins = currentUser.Winns;
+        totLosses = currentUser.Losses;
+    }
 
     public bool EnoughCoins(int cost)
     {

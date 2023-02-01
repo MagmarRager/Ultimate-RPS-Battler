@@ -9,9 +9,11 @@ using UnityEngine;
 
 public class UnitInfo
 {
+    public string name;
     public int unit_Leangth;
     public List<int> units;
 }
+
 
 public class UnitSaver : MonoBehaviour
 {
@@ -85,7 +87,11 @@ public class UnitSaver : MonoBehaviour
     public void LoadTier(int tier)
     {
         LoadingList = true;
-        FirebaseManager.Instance.LoadUnitData<UnitInfo>(tier, ListLoaded);
+
+        if (LoadedTier.Count < tier + 1)
+            FirebaseManager.Instance.LoadUnitData<UnitInfo>(tier, ListLoaded);
+        else
+            LoadingList = false;
     }
 
     private void ListLoaded(List<UnitInfo> UsersInfo)

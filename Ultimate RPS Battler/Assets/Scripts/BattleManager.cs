@@ -38,7 +38,7 @@ public class BattleManager : MonoBehaviour
         posHandler = GetComponentInChildren<PointHandler>();
         gameStarted = false;
 
-        UnitSaver.Instance.LoadTier(0);
+        UnitSaver.Instance.LoadTier(PlayerStatsHandler.Instance.tier);
         UnitSaver.Instance.LoadUnits(unitIDLoadL, 0);
         //UnitSaver.Instance.LoadUnits(unitIDLoadR, Random.Range(1,4));
 
@@ -64,7 +64,7 @@ public class BattleManager : MonoBehaviour
         if (!UnitSaver.Instance.LoadingList)
         {
             Debug.Log("READY!!!");
-            unitIDLoadR = UnitSaver.Instance.LoadUnitsFromDatabase(0);
+            unitIDLoadR = UnitSaver.Instance.LoadUnitsFromDatabase(PlayerStatsHandler.Instance.tier);
 
             startGame = true;
         }

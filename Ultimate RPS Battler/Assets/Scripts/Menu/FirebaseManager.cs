@@ -17,6 +17,7 @@ public class FirebaseManager : MonoBehaviour
 
     //Function that gets called after load or save
     public delegate void OnLoadedDelegate(DataSnapshot snapshot);
+    public delegate void OnLoadedStatsDelegate();
     public delegate void OnSaveDelegate();
 
     FirebaseDatabase db;
@@ -96,13 +97,29 @@ public class FirebaseManager : MonoBehaviour
             var ListOfT = new List<T>();
 
             foreach (var item in task.Result.Children)
+            {
                 ListOfT.Add(JsonUtility.FromJson<T>(item.GetRawJsonValue()));
+            }
+            Debug.Log(tierIndex+" Load Unit Data Test");
 
             onLoadedDelegate(ListOfT);
         });
     }
 
+    public void LoadStatsData(OnLoadedStatsDelegate onLoadedStatsDelegate)
+    {
+        db.RootReference.Child("users").Child(userId).GetValueAsync().ContinueWithOnMainThread(task =>
+        {
+            if (task.Exception != null)
+                Debug.LogWarning(task.Exception);
 
+
+            PlayerStatsHandler.Instance.RefreshStats(JsonUtility.FromJson<UserInfo>(task.Result.GetRawJsonValue()));
+            onLoadedStatsDelegate.Invoke();
+        });
+    }
+
+}
 
 
     ////Returns one list of objects that we want to load from the database
@@ -121,4 +138,4 @@ public class FirebaseManager : MonoBehaviour
     //        onLoadedDelegate(ListOfT);
     //    });
     //}
-}
+
