@@ -3,7 +3,6 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 public class BattleManager : MonoBehaviour
 {
@@ -29,6 +28,8 @@ public class BattleManager : MonoBehaviour
 
     public TextMeshProUGUI healthText;
 
+    public TextMeshProUGUI playerLeft;
+    public TextMeshProUGUI playerRight;
 
     // Start is called before the first frame update
     void Start()
@@ -63,8 +64,16 @@ public class BattleManager : MonoBehaviour
     {
         if (!UnitSaver.Instance.LoadingList)
         {
+            int tier = PlayerStatsHandler.Instance.tier;
+            int randomUser = Random.Range(0, UnitSaver.Instance.LoadedTier[tier].Count);
+
+            playerRight.text = "" + UnitSaver.Instance.LoadedTier[tier][randomUser].name;
+            Debug.Log(UnitSaver.Instance.LoadedTier[tier][randomUser].name+" is name");
+
+            playerLeft.text = "" + PlayerStatsHandler.Instance.userName;
+
             Debug.Log("READY!!!");
-            unitIDLoadR = UnitSaver.Instance.LoadUnitsFromDatabase(PlayerStatsHandler.Instance.tier);
+            unitIDLoadR = UnitSaver.Instance.LoadUnitsFromDatabase(tier, randomUser);
 
             startGame = true;
         }
@@ -145,6 +154,8 @@ public class BattleManager : MonoBehaviour
         if (LeftBoardUnits.Count <= 0 || RightBoardUnits.Count <= 0)
         {
             gameEnd = true;
+            PlayerStatsHandler.Instance.tier++;
+
             if (LeftBoardUnits.Count <= 0 && RightBoardUnits.Count <= 0)
             {
                 Debug.Log("DRAW!");
@@ -153,17 +164,19 @@ public class BattleManager : MonoBehaviour
             else if (RightBoardUnits.Count <= 0)
             {
                 Debug.Log("LEFT WINS!!");
+
+                PlayerStatsHandler.Instance.winns++;
+
+
                 UnitSaver.Instance.SaveUnitsToDatabase(unitIDLoadL, PlayerStatsHandler.Instance.tier);
-
-
-                PlayerStatsHandler.Instance.tier++;
-
                 Invoke(nameof(BattleFinished), 2);
             }
             else if (LeftBoardUnits.Count <= 0)
             {
                 Debug.Log("RIGHT WINS!?");
+
                 PlayerStatsHandler.Instance.lives -= 1;
+
                 Invoke(nameof(BattleFinished), 2);
             }
 

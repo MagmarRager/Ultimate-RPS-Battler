@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class BoardController : MonoBehaviour
 {
@@ -10,27 +11,47 @@ public class BoardController : MonoBehaviour
 
     [SerializeField] List<Board> allBoards = new List<Board>();
     public GameObject boardPref;
-    
 
     [SerializeField] private int boardAmmount = 6;
+
 
     private void Start()
     {
         LoadBoard();
     }
 
-    private void Update()
+    public void StartBattle()
     {
-        if (Input.GetKey(KeyCode.S) && Input.GetKeyDown(KeyCode.B))
+        if (IsBoardEmpty())
+        {
+            Debug.Log("Board is empty!");
+            //Add warning message here!
+        }
+        else
         {
             SaveBoard();
+            PlayerStatsHandler.Instance.LoadAnotherScene("BattleScene");
         }
     }
 
-    public void StartBattle()
+
+    private bool IsBoardEmpty()
     {
-        SaveBoard();
-        PlayerStatsHandler.Instance.LoadAnotherScene("BattleScene");
+        int num = 0;
+
+        for (int i = 0; i < allBoards.Count; i++)
+        {
+            if (allBoards[i].holdingUnit != null)
+                num++;
+        }
+
+        Debug.Log("Number of units are " + num);
+
+
+        if (num < 1)
+            return true;
+        else
+            return false;
     }
 
     void LoadBoard()
@@ -44,13 +65,14 @@ public class BoardController : MonoBehaviour
         }
         StartCoroutine(waitForBoardPlacement());
 
+        IsBoardEmpty();
     }
 
     IEnumerator waitForBoardPlacement()
     {
         yield return new WaitForEndOfFrame();
 
-        if(boardUnitsID.Count > 0)
+        if (boardUnitsID.Count > 0)
         {
             for (int i = 0; i < boardUnitsID.Count; i++)
             {
@@ -58,6 +80,12 @@ public class BoardController : MonoBehaviour
                 allBoards[i].GetComponent<Board>().holdingUnit = boardUnits[i];
             }
         }
+    }
+
+    void SaveBoard()
+    {
+        UpdateBoard();
+        UnitSaver.Instance.SaveUnits(boardUnitsID, 0);
     }
 
     void UpdateBoard()
@@ -77,11 +105,8 @@ public class BoardController : MonoBehaviour
         {
             boardUnitsID.Add(boardUnits[i].GetComponent<UnitScript>().unitSO.ID);
         }
+
+        IsBoardEmpty();
     }
 
-    void SaveBoard()
-    {
-        UpdateBoard();
-        UnitSaver.Instance.SaveUnits(boardUnitsID, 0);
-    }
 }

@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: e9cd22c0d194f67469d7db6c77b33e40
+guid: e356e33687d8a3745ba893336a1df573
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -101,11 +101,44 @@ TextureImporter:
     overridden: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Arrow_Head
+      name: ArrowSegments_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 32
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6e094aec76e19f34bb7f25b19576bcba
+      internalID: -1815802641
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ArrowSegments_1
       rect:
         serializedVersion: 2
         x: 0
@@ -119,14 +152,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 6f96a1b05d55fec49a95bcce320f69ac
-      internalID: -359524115
+      spriteID: 51ed007ee6848634abf75aa9630d4ec4
+      internalID: 1678503299
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Arrow_Section
+      name: ArrowSegments_2
       rect:
         serializedVersion: 2
         x: 0
@@ -140,8 +173,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: e705ea2d1adfd1642ae98bc49ceb0687
-      internalID: -1776885076
+      spriteID: 7d98e6f1b8af18e46ad0463efbafba58
+      internalID: 797746097
       vertices: []
       indices: 
       edges: []
@@ -157,8 +190,9 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Arrow_Section: -1776885076
-      Arrow_Head: -359524115
+      ArrowSegments_0: -1815802641
+      ArrowSegments_2: 797746097
+      ArrowSegments_1: 1678503299
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

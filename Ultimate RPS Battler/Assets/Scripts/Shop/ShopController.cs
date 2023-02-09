@@ -42,7 +42,7 @@ public class ShopController : MonoBehaviour
 
         int shopAmmount = Random.Range(4, 6);
 
-        for (int i = 0; i < shopAmmount; i++)
+        for (int i = 0; i < shopAmmount + 1; i++)
         {
 
             GameObject newShopPos = Instantiate(shopPosPrefab, transform);
@@ -58,7 +58,7 @@ public class ShopController : MonoBehaviour
 
         yield return new WaitForEndOfFrame();
 
-        for (int i = 0; i < allShops.Count; i++)
+        for (int i = 0; i < allShops.Count - 1; i++)
         {
             int randomUnit = Random.Range(0, UnitSaver.Instance.baseUnits.Count);
             UnitSaver.Instance.SpawnUnit(randomUnit, allShops[i].transform.position, shopUnits);

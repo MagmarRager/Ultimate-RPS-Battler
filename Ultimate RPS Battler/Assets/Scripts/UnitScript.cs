@@ -12,10 +12,6 @@ public class UnitScript : MonoBehaviour
     private Rigidbody2D rigBody;
     private SpriteRenderer spritRend;
 
-    [Header("UI")]
-    [SerializeField] private TextMeshProUGUI healthText;
-    [SerializeField] private TextMeshProUGUI damageText;
-
     [Header("Variables")]
     public int currentHealth;
     public int currentDamage;
@@ -37,18 +33,6 @@ public class UnitScript : MonoBehaviour
 
         currentDamage = unitSO.damage;
         currentHealth = unitSO.health;
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        updateUI();
-    }
-
-    public void updateUI()
-    {
-        healthText.text = "" + currentHealth;
-        damageText.text = "" + currentDamage;
     }
 
     public void TakeDamage(int damageAmmount, UnitTypes damageType)

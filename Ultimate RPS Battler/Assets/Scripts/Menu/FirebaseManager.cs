@@ -3,9 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using Firebase.Database;
 using Firebase.Extensions;
-using Unity.VisualScripting;
 using Firebase.Auth;
-using static UnityEditor.Progress;
+using Unity.VisualScripting.Antlr3.Runtime.Misc;
 
 public class FirebaseManager : MonoBehaviour
 {
@@ -119,23 +118,27 @@ public class FirebaseManager : MonoBehaviour
         });
     }
 
+    public void UpdatePlayeStats()
+    {
+        UserInfo userInfo = new UserInfo();
+
+        userInfo.UserName = PlayerStatsHandler.Instance.userName;
+        userInfo.Winns = PlayerStatsHandler.Instance.totWinns;
+        userInfo.Losses = PlayerStatsHandler.Instance.totLosses;
+
+        string jsonString = JsonUtility.ToJson(userInfo);
+
+        db.RootReference.Child("users").Child(userId).SetRawJsonValueAsync(jsonString).ContinueWithOnMainThread(task =>
+        {
+            if (task.Exception != null)
+                Debug.LogWarning(task.Exception);
+            else
+            {
+                Debug.Log("DataTestWrite: Complete");
+            }
+        });
+    }
 }
 
 
-    ////Returns one list of objects that we want to load from the database
-    //public void LoadMultipleData<T>(string path, OnLoadedMultipleDelegate<T> onLoadedDelegate)
-    //{
-    //    db.RootReference.Child(path).GetValueAsync().ContinueWithOnMainThread(task =>
-    //    {
-    //        if (task.Exception != null)
-    //            Debug.LogWarning(task.Exception);
-
-    //        var ListOfT = new List<T>();
-
-    //        foreach (var item in task.Result.Children)
-    //            ListOfT.Add(JsonUtility.FromJson<T>(item.GetRawJsonValue()));
-
-    //        onLoadedDelegate(ListOfT);
-    //    });
-    //}
 

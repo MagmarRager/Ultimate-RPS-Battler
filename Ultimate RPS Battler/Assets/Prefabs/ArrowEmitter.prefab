@@ -24,7 +24,7 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3822763664881133868}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -51,5 +51,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   arrowHeadPref: {fileID: 6307642826734384743, guid: 143b4c8d6ae84d842965de2e5aac310f, type: 3}
   arrowNodePref: {fileID: 7962926144077114321, guid: 48f965758ee25854b916cc9bba8d2a7b, type: 3}
+  arrowStartPref: {fileID: 7962926144077114321, guid: b9a96beed3777f7438c5de9a8f9e570e, type: 3}
   arrowNodeNum: 10
   scaleFactor: 1
+  arrowNodes: []

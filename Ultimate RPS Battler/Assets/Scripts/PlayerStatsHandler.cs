@@ -14,12 +14,12 @@ public class PlayerStatsHandler : MonoBehaviour
     [Header("In Game stats")]
     public int coins = 10;
     public int tier = 0;
-    public int shopTier = 0;
+    public int winns = 0;
     public int lives;
 
     [Header("Out of Game stats")]
     public string userName;
-    public int totWins;
+    public int totWinns;
     public int totLosses;
 
     private void Awake()
@@ -43,7 +43,7 @@ public class PlayerStatsHandler : MonoBehaviour
     public void RefreshStats(UserInfo currentUser)
     {
         userName = currentUser.UserName;
-        totWins = currentUser.Winns;
+        totWinns = currentUser.Winns;
         totLosses = currentUser.Losses;
     }
 

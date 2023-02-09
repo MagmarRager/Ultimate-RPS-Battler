@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class TargetArrow : MonoBehaviour
 {
 
-    public GameObject arrowHeadPref, arrowNodePref;
+    public GameObject arrowHeadPref, arrowNodePref, arrowStartPref;
 
     public int arrowNodeNum = 5;
 
@@ -25,6 +25,8 @@ public class TargetArrow : MonoBehaviour
     private void Awake()
     {
         origin = GetComponent<RectTransform>();
+
+        arrowNodes.Add(Instantiate(arrowStartPref, transform).GetComponent<RectTransform>());
 
         for (int i = 0; i < arrowNodeNum; i++)
         {

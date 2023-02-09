@@ -74,6 +74,9 @@ public class UnitSaver : MonoBehaviour
 
         unitInfo.unit_Leangth = units.Count;
         unitInfo.units = units;
+        unitInfo.name = PlayerStatsHandler.Instance.userName;
+
+
 
         string jsonString = JsonUtility.ToJson(unitInfo);
 
@@ -107,7 +110,10 @@ public class UnitSaver : MonoBehaviour
 
     public List<int> LoadUnitsFromDatabase(int tier) // If wanted random
     {
-        return LoadedTier[tier][UnityEngine.Random.Range(0, LoadedTier[tier].Count)].units;
+        int randomUser = UnityEngine.Random.Range(0, LoadedTier[tier].Count);
+
+
+        return LoadedTier[tier][randomUser].units;
     }
 
 

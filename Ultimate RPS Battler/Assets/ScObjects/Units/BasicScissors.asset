@@ -14,8 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   unitName: Basic Scissors
   ID: 2
-  health: 10
-  damage: 5
+  health: 2
+  damage: 1
   unitType: 3
   sprite: {fileID: 1087390360, guid: 38cf2bd9e0940c84fab644139d9b1a2e, type: 3}
   cost: 5

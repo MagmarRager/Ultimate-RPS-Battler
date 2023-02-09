@@ -18,9 +18,7 @@ public class InputHandler : MonoBehaviour, IPointerClickHandler, IDragHandler, I
     [SerializeField]
     private List<Transform> arrowPositions = new List<Transform>();
 
-    [Header("Text Components")]
-    public TextMeshProUGUI coinsText;
-    public TextMeshProUGUI healthText;
+    public TextMeshProUGUI coinsText, healthText, winnsText, roundText;
 
 
     void Start()
@@ -142,14 +140,16 @@ public class InputHandler : MonoBehaviour, IPointerClickHandler, IDragHandler, I
 
     public void UpdateUI()
     {
-        if (coinsText != null)
-        {
-            coinsText.text = "" + PlayerStatsHandler.Instance.coins;
-        }
-        if (healthText != null)
-        {
-            healthText.text = "" + PlayerStatsHandler.Instance.lives;
-        }
+
+        coinsText.text = "" + PlayerStatsHandler.Instance.coins;
+
+        winnsText.text = "W:" + PlayerStatsHandler.Instance.winns;
+
+        roundText.text = "T:" + PlayerStatsHandler.Instance.tier;
+
+        healthText.text = "H:" + PlayerStatsHandler.Instance.lives;
+
+        //I call it the WTH, What The Hell
     }
 
     void UpdateArrow()

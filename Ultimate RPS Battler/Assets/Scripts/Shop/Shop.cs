@@ -30,7 +30,7 @@ public class Shop : MonoBehaviour
         }
         else if(holdingUnit == null && priceText.text != "")
         {
-            priceText.text = "";
+            priceText.text = "$";
         }
     }
 }

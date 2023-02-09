@@ -6,8 +6,11 @@ using UnityEngine.SceneManagement;
 
 public class MainMenuController : MonoBehaviour
 {
-    public GameObject profilePanel;
     public TextMeshProUGUI userText;
+
+    public TextMeshProUGUI winnsText;
+    public TextMeshProUGUI lossesText;
+
 
     //Must find another way to do this
     private const string UNITS_LENGTH = "UNITS_LENGTH";
@@ -15,17 +18,10 @@ public class MainMenuController : MonoBehaviour
 
     private void Start()
     {
-        profilePanel.SetActive(false);
         userText.text = PlayerStatsHandler.Instance.userName + "!";
-    }
 
-    public void ToggleStats()
-    {
-        if (profilePanel.activeSelf)
-            profilePanel.SetActive(false);
-
-        else
-            profilePanel.SetActive(true);
+        winnsText.text = PlayerStatsHandler.Instance.totWinns + "";
+        lossesText.text = PlayerStatsHandler.Instance.totLosses + "";
     }
 
     public void PlayButton()
@@ -38,6 +34,8 @@ public class MainMenuController : MonoBehaviour
         PlayerPrefs.DeleteKey(0 + UNITS_LENGTH);
 
         PlayerStatsHandler.Instance.lives = 5;
+        PlayerStatsHandler.Instance.winns = 0;
+        PlayerStatsHandler.Instance.tier = 0;
         SceneManager.LoadScene("ShopScene");
     }
 

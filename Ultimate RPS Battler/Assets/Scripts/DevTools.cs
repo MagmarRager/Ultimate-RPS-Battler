@@ -5,10 +5,12 @@ using UnityEngine.SceneManagement;
 
 public class DevTools : MonoBehaviour
 {
-
+    [Header("Manual Save")]
+    public string setInName;
     public int tier = 0;
     public List<int> savedUnits = new List<int>();
 
+    [Header("Manual Load")]
     public List<UnitInfo> loadedUnitinfo = new List<UnitInfo>();
     private void Update()
     {
