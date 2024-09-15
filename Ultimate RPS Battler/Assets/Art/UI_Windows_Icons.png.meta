@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 766415f4aa4d8ed4c87926dca63b3b42
+guid: 4f7ee3ccfd3aad3408fc5767725c0dee
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -44,7 +44,7 @@ TextureImporter:
   compressionQuality: 50
   spriteMode: 2
   spriteExtrude: 1
-  spriteMeshType: 0
+  spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
   spritePixelsToUnits: 16
@@ -117,133 +117,154 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: UI_Windows_0
+      name: UI_Icon_Heart
       rect:
         serializedVersion: 2
         x: 0
         y: 32
-        width: 32
-        height: 32
+        width: 16
+        height: 16
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
-      border: {x: 16, y: 1, z: 1, w: 14}
+      border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 2492ab488a259e04a92c36d02bafcbf9
-      internalID: -1269120478
+      spriteID: 7e7d04a461c0177438132812b3ffa83f
+      internalID: -1642427655
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: UI_Button
+      name: UI_Icons_Crown
       rect:
         serializedVersion: 2
-        x: 34
-        y: 51
-        width: 12
-        height: 11
+        x: 16
+        y: 32
+        width: 16
+        height: 16
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
-      border: {x: 1, y: 1, z: 1, w: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 12972542c5803984f907e409bcedbfde
-      internalID: 524656881
+      spriteID: 3f1b3fa2640470940b03a7c070477475
+      internalID: 984949262
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: UI_Button2
+      name: UI_Icons_Skull
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 32
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 39cf88f8f5aa9a9409b9884bc8cbd5b8
+      internalID: 1439324084
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: UI_Icons_Dollar
       rect:
         serializedVersion: 2
         x: 48
-        y: 51
+        y: 32
         width: 16
-        height: 10
+        height: 16
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
-      border: {x: 1, y: 1, z: 1, w: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 17e5540e0d83c034d9eb1a6918708e35
-      internalID: 1856522885
+      spriteID: 7d042f184b3dd7941930ad83d3d4ba6b
+      internalID: 911253351
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: UI_InputField
+      name: Sprite_Droplett
       rect:
         serializedVersion: 2
-        x: 34
-        y: 34
-        width: 12
-        height: 11
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 1, y: 1, z: 1, w: 1}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: aab6d73697f6a7f42930ba56c71b12fd
-      internalID: -1056587179
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: UI_Indent2
-      rect:
-        serializedVersion: 2
-        x: 48
-        y: 35
+        x: 0
+        y: 16
         width: 16
-        height: 10
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 1, y: 1, z: 1, w: 1}
+        height: 16
+      alignment: 9
+      pivot: {x: 0.5306279, y: 0.56305766}
+      border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 0605587e2c437de45b0f9542308bd715
-      internalID: -392805568
+      spriteID: 2a24dc3b53a745c43a5660e5cdfcc7ea
+      internalID: -514514500
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: UI_Indent
+      name: Sprite_Dust_Inner
       rect:
         serializedVersion: 2
-        x: 34
-        y: 18
-        width: 12
-        height: 11
+        x: 16
+        y: 16
+        width: 16
+        height: 16
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
-      border: {x: 1, y: 1, z: 1, w: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 0d1fec9cc3facea4386e0d9b8e02e9ae
-      internalID: -447869605
+      spriteID: 88c77fd861bf86c499f546e446949a45
+      internalID: -620626793
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: UI_Window1
+      name: Sprite_Dust_Outer
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 16
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 78e68369c7b40664597a67e5d72227b6
+      internalID: 528901739
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sprite_Paper
       rect:
         serializedVersion: 2
         x: 0
@@ -252,19 +273,19 @@ TextureImporter:
         height: 16
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
-      border: {x: 1, y: 1, z: 7, w: 8}
+      border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 771bb492112eea84a8e6886888eb6879
-      internalID: 92892656
+      spriteID: 2ba80e56e89afd24993c2485c707fa61
+      internalID: 1841832373
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: UI_Window2
+      name: Sprite_Scissors
       rect:
         serializedVersion: 2
         x: 16
@@ -273,46 +294,25 @@ TextureImporter:
         height: 16
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
-      border: {x: 1, y: 1, z: 7, w: 14}
+      border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 4d29ec06b78c54f499feb2f7653f8ae4
-      internalID: 1007569908
+      spriteID: 0fab0640b5c042d46878cbf786c94487
+      internalID: -134988099
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: UI_Backround
+      name: Sprite_Rock
       rect:
         serializedVersion: 2
         x: 32
         y: 0
-        width: 32
+        width: 16
         height: 16
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 23, y: 12, z: 1, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 9a0f750423237cb4cbeb70123e6a69e7
-      internalID: 1729629304
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: UI_LogoIn
-      rect:
-        serializedVersion: 2
-        x: 49
-        y: 19
-        width: 14
-        height: 10
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -320,71 +320,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: db500556b2b857040a2c912571b90beb
-      internalID: 1151622709
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: UI_Window_Empty
-      rect:
-        serializedVersion: 2
-        x: 16
-        y: 16
-        width: 16
-        height: 16
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 8, y: 1, z: 1, w: 1}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 6270e51fae5bcb34babc04de2b8ced6b
-      internalID: 988002081
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: UI_LogoOut
-      rect:
-        serializedVersion: 2
-        x: 33
-        y: 1
-        width: 14
-        height: 10
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 27aa302f019f30e49a4c581877012367
-      internalID: 1533096584
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: UI_Window_Empt
-      rect:
-        serializedVersion: 2
-        x: 0
-        y: 16
-        width: 16
-        height: 16
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 1, y: 1, z: 7, w: 8}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: be6babb03ad253c42a5888f76b634076
-      internalID: -346864304
+      spriteID: d2e7b38d4d6cad14397e88ae7dbf7e9b
+      internalID: 746370485
       vertices: []
       indices: 
       edges: []
@@ -400,19 +337,16 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      UI_LogoIn: 1151622709
-      UI_Button2: 1856522885
-      UI_InputField: -1056587179
-      UI_Indent: -447869605
-      UI_Window_Empty: 988002081
-      UI_Windows_0: -1269120478
-      UI_Window_Empt: -346864304
-      UI_Button: 524656881
-      UI_Window1: 92892656
-      UI_Backround: 1729629304
-      UI_LogoOut: 1533096584
-      UI_Window2: 1007569908
-      UI_Indent2: -392805568
+      UI_Icons_Dollar: 911253351
+      Sprite_Dust_Inner: -620626793
+      Sprite_Paper: 1841832373
+      Sprite_Scissors: -134988099
+      UI_Icons_Crown: 984949262
+      Sprite_Droplett: -514514500
+      UI_Icons_Skull: 1439324084
+      Sprite_Rock: 746370485
+      UI_Icon_Heart: -1642427655
+      Sprite_Dust_Outer: 528901739
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

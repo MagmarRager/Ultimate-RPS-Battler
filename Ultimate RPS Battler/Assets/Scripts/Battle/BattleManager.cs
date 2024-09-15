@@ -7,7 +7,7 @@ using UnityEngine;
 public class BattleManager : MonoBehaviour
 {
     [Header("Variables")]
-    public float fightSpeed = 0.5f;
+    private float fightSpeed = 1f;
     private float timer;
     public bool startGame = false;
     private bool gameStarted = false;

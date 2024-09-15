@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class UnitScript : MonoBehaviour
@@ -11,6 +12,10 @@ public class UnitScript : MonoBehaviour
 
     private Rigidbody2D rigBody;
     private SpriteRenderer spritRend;
+
+    public ParticleSystem drippingParticle;
+    public ParticleSystem explosionParticle;
+
 
     [Header("Variables")]
     public int currentHealth;
@@ -25,6 +30,7 @@ public class UnitScript : MonoBehaviour
 
         rigBody = GetComponent<Rigidbody2D>();
         spritRend = GetComponent<SpriteRenderer>();
+
 
         rigBody.simulated = false;
 
@@ -44,11 +50,18 @@ public class UnitScript : MonoBehaviour
         else
             currentHealth -= damageAmmount * 2;
 
+        if(currentHealth == 1)
+        {
+            drippingParticle.Play();
+        }
 
         if (currentHealth <= 0)
         {
             isDead = true;
             //do death trigger here
+            drippingParticle.Stop();
+
+            explosionParticle.Play();
             rigBody.simulated = true;
 
             float xForce = Random.Range(0, 2) * 2 - 1;
